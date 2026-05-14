@@ -1,3 +1,4 @@
+
 const API_KEY = "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";
 
 const models = [
@@ -11,27 +12,6 @@ const models = [
 
 let currentModel = models[0].id;
 let currentMessages = [];
-
-function renderModels() {
-  const container = document.getElementById('modelList');
-  container.innerHTML = '';
-  
-  models.forEach(model => {
-    const div = document.createElement('div');
-    div.className = `px-4 py-3 rounded-2xl cursor-pointer transition-all ${currentModel === model.id ? 'bg-purple-600 text-white' : 'hover:bg-zinc-900'}`;
-    div.textContent = model.name;
-    div.onclick = () => {
-      currentModel = model.id;
-      renderModels();
-      if (window.innerWidth < 1024) toggleSidebar();
-    };
-    container.appendChild(div);
-  });
-}
-
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-}
 
 function addMessage(role, content) {
   const chat = document.getElementById('chat');
@@ -71,8 +51,8 @@ async function sendMessage() {
       headers: {
         "Authorization": `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://switchai.local",
-        "X-Title": "SwitchAI Black"
+        "HTTP-Referer": "https://layerfrte.github.io",
+        "X-Title": "SwitchAI"
       },
       body: JSON.stringify({
         model: currentModel,
@@ -96,16 +76,14 @@ async function sendMessage() {
   }
 }
 
-function newChat() {
+document.getElementById('userInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') sendMessage();
+});
+
+// Новый чат по двойному клику на заголовок
+document.querySelector('h1').addEventListener('dblclick', () => {
   if (confirm("Начать новый чат?")) {
     currentMessages = [];
     document.getElementById('chat').innerHTML = '';
   }
-}
-
-// Инициализация
-renderModels();
-
-document.getElementById('userInput').addEventListener('keypress', e => {
-  if (e.key === 'Enter') sendMessage();
 });
