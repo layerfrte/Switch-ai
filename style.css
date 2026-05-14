@@ -2,35 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.input-container {
-  animation: slideUpInput 0.6s ease forwards;
-}
-
-@keyframes slideUpInput {
-  from {
-    opacity: 0;
-    transform: translateY(80px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .message {
-  animation: messagePop 0.4s ease forwards;
+  animation: pop 0.4s ease forwards;
 }
 
-@keyframes messagePop {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Красивый скролл */
-#chat::-webkit-scrollbar {
-  width: 6px;
-}
-#chat::-webkit-scrollbar-thumb {
-  background: #4b5563;
-  border-radius: 20px;
+@keyframes pop {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
