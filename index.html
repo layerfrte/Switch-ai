@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwitchAI • Black</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white">
+  <div class="flex h-screen overflow-hidden">
+    
+    <!-- Боковое меню -->
+    <div id="sidebar" class="w-72 bg-zinc-950 border-r border-zinc-800 flex flex-col transition-all duration-300">
+      <div class="p-5 border-b border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 bg-gradient-to-br from-purple-600 to-violet-600 rounded-xl flex items-center justify-center text-xl">🌑</div>
+          <h1 class="text-2xl font-bold tracking-tighter">SwitchAI</h1>
+        </div>
+        <button onclick="toggleSidebar()" class="lg:hidden text-gray-400 hover:text-white">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+      
+      <div class="p-4">
+        <p class="text-xs text-gray-500 mb-3 px-3">МОДЕЛИ</p>
+        <div id="modelList" class="space-y-1"></div>
+      </div>
+    </div>
+
+    <!-- Основная область -->
+    <div class="flex-1 flex flex-col">
+      <!-- Верхняя панель -->
+      <header class="h-14 bg-zinc-950 border-b border-zinc-800 flex items-center px-4">
+        <button onclick="toggleSidebar()" class="lg:hidden mr-4 text-xl">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="flex-1"></div>
+        <button onclick="newChat()" class="flex items-center gap-2 px-4 py-2 hover:bg-zinc-900 rounded-xl">
+          <i class="fas fa-plus"></i>
+          <span class="hidden sm:inline">Новый чат</span>
+        </button>
+      </header>
+
+      <!-- Чат -->
+      <div id="chat" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 bg-black"></div>
+
+      <!-- Поле ввода -->
+      <div class="p-4 bg-zinc-950 border-t border-zinc-800">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex gap-3">
+            <input id="userInput" 
+                   class="flex-1 bg-zinc-900 border border-zinc-700 rounded-3xl px-6 py-5 focus:outline-none focus:border-purple-600 text-lg"
+                   placeholder="Напишите сообщение...">
+            <button onclick="sendMessage()" 
+                    class="w-14 h-14 bg-purple-600 hover:bg-purple-500 rounded-3xl flex items-center justify-center transition-all active:scale-95">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          <div id="status" class="text-center text-sm mt-3 text-red-400 min-h-[24px]"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
