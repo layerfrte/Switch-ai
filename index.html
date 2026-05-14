@@ -8,45 +8,52 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-black text-white min-h-screen">
+<body class="bg-black text-white overflow-hidden">
 
   <!-- Welcome Screen -->
-  <div id="welcome" class="flex flex-col items-center justify-center min-h-screen px-6 text-center">
-    <div class="mb-8">
-      <div class="w-28 h-28 mx-auto bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-6xl shadow-2xl shadow-purple-500/50">
-        🌌
+  <div id="welcome" class="min-h-screen flex flex-col items-center justify-center px-6 relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/10 to-transparent"></div>
+    
+    <!-- Логотип с glow -->
+    <div class="relative mb-8">
+      <div class="w-32 h-32 mx-auto bg-gradient-to-br from-purple-500 via-blue-500 to-violet-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/70 animate-pulse-slow">
+        <span class="text-7xl drop-shadow-2xl">🌌</span>
       </div>
-    </div>
-    <h1 class="text-5xl font-bold tracking-tighter mb-2">SwitchAI</h1>
-    <p class="text-gray-400 mb-10">Выберите нейросеть и начните общение</p>
-
-    <!-- Примеры запросов -->
-    <div class="w-full max-w-md space-y-3 mb-12">
-      <button onclick="startChatWithPrompt('Что ты умеешь?')" class="w-full bg-zinc-900 hover:bg-zinc-800 py-4 rounded-3xl text-left px-6">Что ты умеешь?</button>
-      <button onclick="startChatWithPrompt('Напиши стихотворение про космос')" class="w-full bg-zinc-900 hover:bg-zinc-800 py-4 rounded-3xl text-left px-6">Напиши стихотворение про космос</button>
-      <button onclick="startChatWithPrompt('Помоги с кодом на Python')" class="w-full bg-zinc-900 hover:bg-zinc-800 py-4 rounded-3xl text-left px-6">Помоги с кодом на Python</button>
+      <div class="absolute inset-0 bg-purple-500/30 blur-3xl rounded-3xl -z-10"></div>
     </div>
 
-    <!-- Выбор моделей -->
-    <div class="w-full max-w-md">
-      <p class="text-xs text-gray-500 mb-3 text-center">ВЫБЕРИТЕ НЕЙРОСЕТЬ</p>
-      <div id="modelGrid" class="grid grid-cols-4 gap-3"></div>
+    <h1 class="text-6xl font-bold tracking-tighter mb-1 text-white">SwitchAI</h1>
+    <p class="text-gray-400 text-lg mb-12">Выберите нейросеть и начните общение</p>
+
+    <!-- Примеры -->
+    <div class="w-full max-w-lg space-y-4 mb-12">
+      <button onclick="startChatWithPrompt('Что ты умеешь?')" class="glass-btn w-full text-left">Что ты умеешь?</button>
+      <button onclick="startChatWithPrompt('Напиши стихотворение про космос')" class="glass-btn w-full text-left">Напиши стихотворение про космос</button>
+      <button onclick="startChatWithPrompt('Помоги с кодом на Python')" class="glass-btn w-full text-left">Помоги с кодом на Python</button>
+    </div>
+
+    <!-- Модели -->
+    <div class="w-full max-w-lg">
+      <p class="text-center text-xs tracking-widest text-gray-500 mb-4">ВЫБЕРИТЕ НЕЙРОСЕТЬ</p>
+      <div id="modelGrid" class="grid grid-cols-4 gap-4"></div>
     </div>
   </div>
 
-  <!-- Chat Screen (скрыт сначала) -->
+  <!-- Chat Screen -->
   <div id="chatScreen" class="hidden flex flex-col h-screen">
-    <header class="h-14 bg-zinc-950 border-b border-zinc-800 flex items-center px-4">
-      <button onclick="backToWelcome()" class="mr-4 text-xl"><i class="fas fa-arrow-left"></i></button>
-      <h1 class="text-xl font-semibold" id="currentModelName">DeepSeek V3</h1>
+    <header class="h-16 bg-zinc-950/80 backdrop-blur-xl border-b border-white/10 flex items-center px-5">
+      <button onclick="backToWelcome()" class="mr-4 text-2xl"><i class="fas fa-arrow-left"></i></button>
+      <div class="flex-1">
+        <h1 id="currentModelName" class="font-semibold text-xl"></h1>
+      </div>
     </header>
     
-    <div id="chat" class="flex-1 overflow-y-auto p-4 space-y-6 bg-black"></div>
+    <div id="chat" class="flex-1 overflow-y-auto p-5 space-y-7 bg-black"></div>
     
-    <div class="p-4 bg-zinc-950 border-t border-zinc-800">
-      <div class="flex gap-3 max-w-4xl mx-auto">
-        <input id="userInput" class="flex-1 bg-zinc-900 border border-zinc-700 rounded-3xl px-6 py-5 focus:outline-none focus:border-purple-600" placeholder="Сообщение...">
-        <button onclick="sendMessage()" class="w-14 h-14 bg-purple-600 rounded-3xl flex items-center justify-center">
+    <div class="p-5 bg-zinc-950/90 backdrop-blur-xl border-t border-white/10">
+      <div class="flex gap-3">
+        <input id="userInput" class="flex-1 glass-input" placeholder="Напишите сообщение..." autocomplete="off">
+        <button onclick="sendMessage()" class="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-3xl flex items-center justify-center text-xl active:scale-95 transition-transform">
           <i class="fas fa-paper-plane"></i>
         </button>
       </div>
